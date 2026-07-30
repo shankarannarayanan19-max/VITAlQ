@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#0d9488" />
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0d9488" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#14b8a6" stop-opacity="0.2" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Base Hexagon/Shield -->
+  <path d="M50 5 L90 27.5 L90 72.5 L50 95 L10 72.5 L10 27.5 Z" fill="none" stroke="url(#brandGrad)" stroke-width="2" />
+  
+  <!-- Outer glowing rings -->
+  <circle cx="50" cy="50" r="38" fill="none" stroke="#22d3ee" stroke-opacity="0.15" stroke-width="1" />
+  
+  <!-- Left Side: Human Profile Node (representing patient) -->
+  <path d="M46 32 C46 27, 40 27, 36 29 C32 31, 30 35, 30 39 C30 46, 36 49, 36 53 C33 55, 26 56, 22 62 C20 65, 20 70, 20 72" fill="none" stroke="#0f172a" stroke-width="3.5" stroke-linecap="round" />
+  
+  <!-- Right Side: Digital Twin Pulse Node (representing digital twin code/insights) -->
+  <path d="M54 32 C54 27, 60 27, 64 29 C68 31, 70 35, 70 39 C70 46, 64 49, 64 53 C67 55, 74 56, 78 62 C80 65, 80 70, 80 72" fill="none" stroke="#0d9488" stroke-width="3.5" stroke-linecap="round" filter="url(#glow)" />
+  
+  <!-- Center: ECG Heartbeat Connection Line -->
+  <path d="M28 50 L38 50 L42 40 L46 62 L50 35 L54 58 L58 48 L62 50 L72 50" fill="none" stroke="url(#brandGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Grid points to suggest Digital Twin structure -->
+  <circle cx="50" cy="35" r="2.5" fill="#0d9488" />
+  <circle cx="46" cy="62" r="2.5" fill="#0f172a" />
+  <circle cx="54" cy="58" r="2.5" fill="#0d9488" />
+  <circle cx="42" cy="40" r="2" fill="#0f172a" />
+  <circle cx="58" cy="48" r="2" fill="#0d9488" />
+</svg>

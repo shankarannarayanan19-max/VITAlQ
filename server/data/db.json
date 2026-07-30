@@ -1,0 +1,707 @@
+{
+  "users": [
+    {
+      "id": "USER_ADMIN",
+      "username": "admin.vitaiq",
+      "email": "admin@vitaiq.health",
+      "passwordHash": "demo123",
+      "role": "admin",
+      "name": "System Administrator",
+      "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&auto=format&fit=crop&q=80",
+      "verified": true,
+      "createdAt": "2025-01-01"
+    },
+    {
+      "id": "USER_DOC_DEMO",
+      "username": "doctor.demo",
+      "email": "doctor@vitaiq.demo",
+      "passwordHash": "demo123",
+      "role": "doctor",
+      "name": "Dr. Aditi Sharma (Demo)",
+      "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&auto=format&fit=crop&q=80",
+      "nmcNumber": "NMC/2015/04/82910",
+      "specialty": "Endocrinology",
+      "hospitalName": "Apollo Hospitals",
+      "department": "Endocrinology",
+      "verificationStatus": "Approved",
+      "verified": true,
+      "createdAt": "2025-01-01"
+    },
+    {
+      "id": "USER_DOC_1",
+      "username": "dr.aditisharma",
+      "email": "aditi.sharma@apollo.org",
+      "role": "doctor",
+      "name": "Dr. Aditi Sharma",
+      "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&auto=format&fit=crop&q=80",
+      "nmcNumber": "NMC/2015/04/82910",
+      "specialty": "Endocrinology",
+      "qualification": "MD (Medicine), DM (Endocrinology)",
+      "experience": 12,
+      "hospitalName": "Apollo Hospitals",
+      "department": "Endocrinology",
+      "designation": "Senior Consultant Endocrinologist",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "hospitalAddress": "21 Greams Lane, Thousand Lights, Chennai",
+      "consultationType": "Both Physical & Video",
+      "languages": [
+        "English",
+        "Hindi",
+        "Tamil"
+      ],
+      "bio": "Specialist in Type 2 Diabetes Management, Thyroid disorders, and Metabolic Syndrome risk reduction.",
+      "consultationHours": "Mon-Sat: 09:00 AM - 04:00 PM",
+      "verificationStatus": "Approved",
+      "certUrl": "NMC_Cert_82910.pdf",
+      "verified": true,
+      "createdAt": "2025-01-10",
+      "passwordHash": "demo123"
+    },
+    {
+      "id": "USER_DOC_2",
+      "username": "dr.rajeshvarma",
+      "email": "rajesh.varma@fortis.org",
+      "role": "doctor",
+      "name": "Dr. Rajesh Varma",
+      "avatar": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=150&auto=format&fit=crop&q=80",
+      "nmcNumber": "NMC/2012/08/44312",
+      "specialty": "Cardiology",
+      "qualification": "MBBS, MD, DM (Cardiology)",
+      "experience": 15,
+      "hospitalName": "Fortis Healthcare",
+      "department": "Cardiology",
+      "designation": "Chief Interventional Cardiologist",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "hospitalAddress": "Bannerghatta Road, Opposite IIMB, Bengaluru",
+      "consultationType": "Both Physical & Video",
+      "languages": [
+        "English",
+        "Kannada",
+        "Hindi"
+      ],
+      "bio": "Focused on preventive cardiology, hypertension control, and lipid management.",
+      "consultationHours": "Mon-Fri: 10:00 AM - 05:00 PM",
+      "verificationStatus": "Approved",
+      "certUrl": "NMC_Cert_44312.pdf",
+      "verified": true,
+      "createdAt": "2025-02-01",
+      "passwordHash": "demo123"
+    },
+    {
+      "id": "USER_DOC_3",
+      "username": "dr.kavitareddy",
+      "email": "kavita.reddy@manipal.org",
+      "role": "doctor",
+      "name": "Dr. Kavita Reddy",
+      "avatar": "https://images.unsplash.com/photo-1594824813566-8885557d0d08?w=150&auto=format&fit=crop&q=80",
+      "nmcNumber": "NMC/2011/05/29182",
+      "specialty": "Obstetrics & Gynecology",
+      "qualification": "MBBS, MD, DGO, FRCOG",
+      "experience": 16,
+      "hospitalName": "Manipal Hospital",
+      "department": "Obstetrics & Gynecology",
+      "designation": "Head of Obstetrics & Maternal Health",
+      "city": "Hyderabad",
+      "state": "Telangana",
+      "hospitalAddress": "HAL Airport Road, Kodihalli, Hyderabad",
+      "consultationType": "Both Physical & Video",
+      "languages": [
+        "English",
+        "Telugu",
+        "Hindi"
+      ],
+      "bio": "Specializing in High-Risk Pregnancy Care, Prenatal Screening, Antenatal Diagnostics, and Fetal Wellbeing.",
+      "consultationHours": "Mon-Sat: 09:30 AM - 03:30 PM",
+      "verificationStatus": "Approved",
+      "certUrl": "NMC_Cert_29182.pdf",
+      "verified": true,
+      "createdAt": "2025-02-15",
+      "passwordHash": "demo123"
+    },
+    {
+      "id": "USER_PAT_1",
+      "username": "arunkumar",
+      "email": "arun.kumar@healthmail.com",
+      "passwordHash": "demo123",
+      "role": "patient",
+      "name": "Arun Kumar",
+      "patientId": "VIT001",
+      "avatar": "https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=150&auto=format&fit=crop&q=80",
+      "dob": "1973-05-14",
+      "gender": "Male",
+      "bloodGroup": "B+",
+      "phone": "+91 98765 43210",
+      "emergencyContact": "Priya Kumar (Wife) - +91 98765 43211",
+      "address": "Flat 4B, Emerald Heights, T. Nagar, Chennai",
+      "insuranceProvider": "Star Health Insurance (Policy #SH-882910)",
+      "verified": true,
+      "createdAt": "2025-01-15"
+    }
+  ],
+  "patients": {
+    "VIT001": {
+      "id": "VIT001",
+      "name": "Arun Kumar",
+      "age": 52,
+      "gender": "Male",
+      "bloodGroup": "B+",
+      "dob": "1973-05-14",
+      "emergencyContact": "Priya Kumar (Wife) - +91 98765 43211",
+      "address": "Flat 4B, Emerald Heights, T. Nagar, Chennai",
+      "insuranceProvider": "Star Health Insurance (Policy #SH-882910)",
+      "wristbandId": "WB-88192-AK",
+      "riskLevel": "High",
+      "riskScore": 84,
+      "conditions": [
+        "Type 2 Diabetes",
+        "Hypertension",
+        "Early Stage Diabetic Nephropathy"
+      ],
+      "allergies": [
+        {
+          "allergen": "Penicillin",
+          "reaction": "Anaphylaxis",
+          "severity": "Severe"
+        },
+        {
+          "allergen": "NSAIDs (Ibuprofen)",
+          "reaction": "Gastric Ulceration / Rash",
+          "severity": "Moderate"
+        }
+      ],
+      "vitals": {
+        "bloodPressure": "148/92 mmHg",
+        "heartRate": "78 bpm",
+        "spO2": "97%",
+        "temperature": "98.6 °F",
+        "bmi": "28.4 kg/m²",
+        "bloodGlucose": "182 mg/dL"
+      },
+      "medications": [
+        {
+          "name": "Metformin",
+          "dosage": "1000mg",
+          "frequency": "Twice daily",
+          "prescribedBy": "Dr. Aditi Sharma",
+          "startDate": "2022-04-10"
+        },
+        {
+          "name": "Telmisartan",
+          "dosage": "40mg",
+          "frequency": "Once daily (Morning)",
+          "prescribedBy": "Dr. Rajesh Varma",
+          "startDate": "2023-01-15"
+        },
+        {
+          "name": "Empagliflozin",
+          "dosage": "10mg",
+          "frequency": "Once daily",
+          "prescribedBy": "Dr. Aditi Sharma",
+          "startDate": "2024-02-01"
+        },
+        {
+          "name": "Atorvastatin",
+          "dosage": "20mg",
+          "frequency": "Once daily (Night)",
+          "prescribedBy": "Dr. Rajesh Varma",
+          "startDate": "2023-08-20"
+        }
+      ],
+      "labHistory": [
+        {
+          "date": "2025-01-15",
+          "hba1c": 8.4,
+          "eGFR": 62,
+          "creatinine": 1.4,
+          "systolic": 148,
+          "diastolic": 92,
+          "ldl": 138
+        },
+        {
+          "date": "2025-04-20",
+          "hba1c": 8.1,
+          "eGFR": 60,
+          "creatinine": 1.45,
+          "systolic": 146,
+          "diastolic": 90,
+          "ldl": 134
+        },
+        {
+          "date": "2025-08-10",
+          "hba1c": 7.9,
+          "eGFR": 58,
+          "creatinine": 1.5,
+          "systolic": 145,
+          "diastolic": 88,
+          "ldl": 130
+        },
+        {
+          "date": "2025-12-05",
+          "hba1c": 8.2,
+          "eGFR": 57,
+          "creatinine": 1.52,
+          "systolic": 150,
+          "diastolic": 94,
+          "ldl": 140
+        },
+        {
+          "date": "2026-03-18",
+          "hba1c": 8.5,
+          "eGFR": 54,
+          "creatinine": 1.58,
+          "systolic": 148,
+          "diastolic": 92,
+          "ldl": 142
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-03-18",
+          "type": "Lab Result",
+          "title": "Comprehensive Metabolic & Lipid Panel",
+          "doctor": "Dr. Aditi Sharma",
+          "hospital": "Apollo Hospitals",
+          "notes": "HbA1c elevated at 8.5%. eGFR showing gradual decline to 54 mL/min/1.73m²."
+        },
+        {
+          "date": "2025-12-05",
+          "type": "Consultation",
+          "title": "Endocrinology Follow-up",
+          "doctor": "Dr. Aditi Sharma",
+          "hospital": "Apollo Hospitals",
+          "notes": "Added Empagliflozin 10mg. Advised strict low-sodium, renal-diabetic diet."
+        },
+        {
+          "date": "2025-08-10",
+          "type": "Diagnostic",
+          "title": "Renal Ultrasound",
+          "doctor": "Dr. S. K. Nambiar",
+          "hospital": "Apollo Diagnostics",
+          "notes": "Bilateral kidneys normal size, mild increase in cortical echogenicity consistent with diabetic nephropathy."
+        },
+        {
+          "date": "2025-04-20",
+          "type": "Cardiology Review",
+          "title": "Hypertension Assessment",
+          "doctor": "Dr. Rajesh Varma",
+          "hospital": "Fortis Healthcare",
+          "notes": "BP uncontrolled at 146/90. Telmisartan dosage maintained. Advised 30 mins daily walking."
+        },
+        {
+          "date": "2024-02-01",
+          "type": "Medication Change",
+          "title": "SGLT2 Inhibitor Initiation",
+          "doctor": "Dr. Aditi Sharma",
+          "hospital": "Apollo Hospitals",
+          "notes": "Initiated Empagliflozin for cardioprotection and renal delay."
+        }
+      ],
+      "alerts": [
+        {
+          "type": "Warning",
+          "title": "Progressive eGFR Decline Detected",
+          "message": "eGFR has decreased from 62 to 54 mL/min/1.73m² over the last 14 months. Nephrology co-consultation recommended.",
+          "severity": "high"
+        },
+        {
+          "type": "Alert",
+          "title": "Suboptimal Glycemic Control",
+          "message": "HbA1c increased to 8.5% despite triple oral therapy. Consider insulin initiation assessment.",
+          "severity": "medium"
+        },
+        {
+          "type": "Contraindication",
+          "title": "Penicillin Allergy Alert",
+          "message": "Patient has severe anaphylactic reaction to Penicillin class antibiotics. Use Fluoroquinolones or Macrolides.",
+          "severity": "critical"
+        }
+      ],
+      "clinicalSummary": "Arun Kumar is a 52-year-old male diagnosed with Type 2 Diabetes, Hypertension, Early Stage Diabetic Nephropathy. Current vital assessment indicates Blood Pressure of 148/92 mmHg and Heart Rate of 78 bpm. Longitudinal laboratory analysis shows HbA1c at 8.5%, eGFR at 54 mL/min/1.73m², and Serum Creatinine at 1.58 mg/dL. Clinical decision support engine classifies this patient under HIGH RISK profile due to progressive renal function decline and suboptimal glycemic control. Co-management with specialist is recommended."
+    },
+    "VIT002": {
+      "id": "VIT002",
+      "name": "Meena Devi",
+      "age": 38,
+      "gender": "Female",
+      "bloodGroup": "A+",
+      "dob": "1987-11-20",
+      "emergencyContact": "Ramesh Devi (Husband) - +91 98401 22334",
+      "address": "12/4 Anna Salai, Guindy, Chennai",
+      "insuranceProvider": "HDFC ERGO Health (Policy #HE-441029)",
+      "wristbandId": "WB-44019-MD",
+      "riskLevel": "Low",
+      "riskScore": 18,
+      "conditions": [
+        "Mild Bronchial Asthma (Controlled)"
+      ],
+      "allergies": [
+        {
+          "allergen": "Dust Mites",
+          "reaction": "Allergic Rhinitis",
+          "severity": "Mild"
+        }
+      ],
+      "vitals": {
+        "bloodPressure": "118/76 mmHg",
+        "heartRate": "72 bpm",
+        "spO2": "99%",
+        "temperature": "98.4 °F",
+        "bmi": "22.1 kg/m²",
+        "bloodGlucose": "94 mg/dL"
+      },
+      "medications": [
+        {
+          "name": "Budesonide/Formoterol Inhaler",
+          "dosage": "160/4.5 mcg",
+          "frequency": "As needed (PRN)",
+          "prescribedBy": "Dr. K. Srinivas",
+          "startDate": "2023-06-10"
+        }
+      ],
+      "labHistory": [
+        {
+          "date": "2025-03-10",
+          "hba1c": 5.4,
+          "eGFR": 105,
+          "creatinine": 0.7,
+          "systolic": 116,
+          "diastolic": 74,
+          "ldl": 95
+        },
+        {
+          "date": "2025-09-15",
+          "hba1c": 5.3,
+          "eGFR": 108,
+          "creatinine": 0.68,
+          "systolic": 118,
+          "diastolic": 76,
+          "ldl": 92
+        },
+        {
+          "date": "2026-02-28",
+          "hba1c": 5.4,
+          "eGFR": 106,
+          "creatinine": 0.71,
+          "systolic": 118,
+          "diastolic": 76,
+          "ldl": 94
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-02-28",
+          "type": "Annual Checkup",
+          "title": "Routine Executive Health Screening",
+          "doctor": "Dr. K. Srinivas",
+          "hospital": "Apollo Hospitals",
+          "notes": "All metabolic and renal markers within optimal ranges. Spirometry shows normal lung volumes."
+        },
+        {
+          "date": "2025-09-15",
+          "type": "Lab Result",
+          "title": "Lipid & Fasting Glucose Profile",
+          "doctor": "Dr. K. Srinivas",
+          "hospital": "Apollo Diagnostics",
+          "notes": "Glucose 94 mg/dL, HbA1c 5.3%. Excellent metabolic health."
+        }
+      ],
+      "alerts": [
+        {
+          "type": "Info",
+          "title": "Optimal Health Profile",
+          "message": "All vital indicators, renal markers, and lipid values are within ideal reference ranges.",
+          "severity": "low"
+        }
+      ],
+      "clinicalSummary": "Meena Devi is a 38-year-old female with well-controlled mild bronchial asthma. Longitudinal laboratory testing confirms optimal glycemic control (HbA1c 5.4%), preserved renal function (eGFR >100 mL/min/1.73m²), and normotensive blood pressure readings. Maintain current preventative regimen."
+    },
+    "VIT003": {
+      "id": "VIT003",
+      "name": "Rahul Sharma",
+      "age": 45,
+      "gender": "Male",
+      "bloodGroup": "O+",
+      "dob": "1980-08-05",
+      "emergencyContact": "Sunita Sharma (Wife) - +91 99102 88776",
+      "address": "45 Koramangala 4th Block, Bengaluru",
+      "insuranceProvider": "Niva Bupa Health (Policy #NB-772810)",
+      "wristbandId": "WB-99201-RS",
+      "riskLevel": "Moderate",
+      "riskScore": 56,
+      "conditions": [
+        "Essential Hypertension",
+        "Hypercholesterolemia",
+        "Hepatic Steatosis (Fatty Liver Grade I)"
+      ],
+      "allergies": [],
+      "vitals": {
+        "bloodPressure": "136/88 mmHg",
+        "heartRate": "82 bpm",
+        "spO2": "98%",
+        "temperature": "98.6 °F",
+        "bmi": "26.8 kg/m²",
+        "bloodGlucose": "108 mg/dL"
+      },
+      "medications": [
+        {
+          "name": "Amlodipine",
+          "dosage": "5mg",
+          "frequency": "Once daily",
+          "prescribedBy": "Dr. Rajesh Varma",
+          "startDate": "2024-01-10"
+        },
+        {
+          "name": "Rosuvastatin",
+          "dosage": "10mg",
+          "frequency": "Once daily (Night)",
+          "prescribedBy": "Dr. Rajesh Varma",
+          "startDate": "2024-05-15"
+        }
+      ],
+      "labHistory": [
+        {
+          "date": "2025-02-14",
+          "hba1c": 5.7,
+          "eGFR": 92,
+          "creatinine": 0.9,
+          "systolic": 132,
+          "diastolic": 84,
+          "ldl": 158
+        },
+        {
+          "date": "2025-07-22",
+          "hba1c": 5.8,
+          "eGFR": 90,
+          "creatinine": 0.92,
+          "systolic": 134,
+          "diastolic": 86,
+          "ldl": 148
+        },
+        {
+          "date": "2026-01-10",
+          "hba1c": 5.9,
+          "eGFR": 88,
+          "creatinine": 0.95,
+          "systolic": 136,
+          "diastolic": 88,
+          "ldl": 142
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-01-10",
+          "type": "Cardiology Review",
+          "title": "Lipid & BP Follow-up",
+          "doctor": "Dr. Rajesh Varma",
+          "hospital": "Fortis Healthcare",
+          "notes": "LDL improved to 142 mg/dL on Rosuvastatin. BP 136/88 mmHg. Re-emphasized dietary lipid restriction."
+        },
+        {
+          "date": "2025-07-22",
+          "type": "Ultrasound",
+          "title": "Abdominal Ultrasound Scan",
+          "doctor": "Dr. V. Ramanathan",
+          "hospital": "Fortis Diagnostics",
+          "notes": "Grade I fatty liver changes noted. Normal gallbladder and pancreas."
+        }
+      ],
+      "alerts": [
+        {
+          "type": "Warning",
+          "title": "Elevated LDL Cholesterol",
+          "message": "LDL cholesterol remains above target (<100 mg/dL for hypertensive patients). Consider statin titration.",
+          "severity": "medium"
+        },
+        {
+          "type": "Caution",
+          "title": "Stage 1 Pre-Hypertension",
+          "message": "Blood pressure 136/88 mmHg indicates moderate risk elevation. Monitor sodium intake.",
+          "severity": "medium"
+        }
+      ],
+      "clinicalSummary": "Rahul Sharma is a 45-year-old male evaluated for Essential Hypertension and Hypercholesterolemia. Current therapy with Amlodipine 5mg and Rosuvastatin 10mg has partially improved lipid parameters (LDL 142 mg/dL), but cardiovascular risk remains moderately elevated. Dietary modifications and exercise routine strongly advised."
+    }
+  },
+  "hospitals": [
+    {
+      "id": "HOSP001",
+      "name": "Apollo Hospitals",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "status": "Active",
+      "departments": [
+        "Cardiology",
+        "Endocrinology",
+        "Nephrology",
+        "General Medicine"
+      ]
+    },
+    {
+      "id": "HOSP002",
+      "name": "Fortis Healthcare",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "status": "Active",
+      "departments": [
+        "Pulmonology",
+        "Orthopedics",
+        "Cardiology",
+        "Neurology"
+      ]
+    },
+    {
+      "id": "HOSP003",
+      "name": "Manipal Hospital",
+      "city": "Hyderabad",
+      "state": "Telangana",
+      "status": "Active",
+      "departments": [
+        "Obstetrics & Gynecology",
+        "Endocrinology",
+        "Gastroenterology",
+        "Pediatrics"
+      ]
+    },
+    {
+      "id": "HOSP004",
+      "name": "Government General Hospital",
+      "city": "New Delhi",
+      "state": "Delhi",
+      "status": "Active",
+      "departments": [
+        "General Medicine",
+        "Emergency",
+        "Pulmonology"
+      ]
+    }
+  ],
+  "departments": [
+    "Obstetrics & Gynecology",
+    "Endocrinology",
+    "Cardiology",
+    "Nephrology",
+    "Pulmonology",
+    "Neurology",
+    "Orthopedics",
+    "General Medicine",
+    "Gastroenterology",
+    "Pediatrics"
+  ],
+  "appointments": [
+    {
+      "id": "APT-88210",
+      "patientId": "VIT001",
+      "patientName": "Arun Kumar",
+      "patientEmail": "arun.kumar@healthmail.com",
+      "doctorId": "USER_DOC_1",
+      "doctorName": "Dr. Aditi Sharma",
+      "doctorSpecialty": "Endocrinology",
+      "hospitalName": "Apollo Hospitals",
+      "department": "Endocrinology",
+      "date": "2026-08-05",
+      "time": "10:30 AM",
+      "consultationType": "Physical Consultation",
+      "status": "Confirmed",
+      "reason": "Routine Glycemic & Renal Follow-up",
+      "qrCode": "VITAIQ-APT-88210-VIT001-DOC1",
+      "createdAt": "2026-07-28"
+    },
+    {
+      "id": "APT-88211",
+      "patientId": "VIT001",
+      "patientName": "Arun Kumar",
+      "patientEmail": "arun.kumar@healthmail.com",
+      "doctorId": "USER_DOC_2",
+      "doctorName": "Dr. Rajesh Varma",
+      "doctorSpecialty": "Cardiology",
+      "hospitalName": "Fortis Healthcare",
+      "department": "Cardiology",
+      "date": "2026-08-12",
+      "time": "02:00 PM",
+      "consultationType": "Video Consultation",
+      "status": "Pending",
+      "reason": "Hypertension and Lipid Management Review",
+      "qrCode": "VITAIQ-APT-88211-VIT001-DOC2",
+      "createdAt": "2026-07-28"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "NOTIF_1",
+      "userId": "USER_PAT_1",
+      "title": "Appointment Confirmed",
+      "message": "Your Physical Consultation with Dr. Aditi Sharma at Apollo Hospitals is confirmed for Aug 05, 2026 at 10:30 AM.",
+      "timestamp": "10 mins ago",
+      "read": false,
+      "type": "appointment"
+    },
+    {
+      "id": "NOTIF_2",
+      "userId": "USER_DOC_1",
+      "title": "New Patient Appointment Request",
+      "message": "Arun Kumar booked a physical consultation for Aug 05, 2026.",
+      "timestamp": "1 hour ago",
+      "read": false,
+      "type": "appointment"
+    }
+  ],
+  "connections": {
+    "VIT001": [
+      "USER_DOC_1",
+      "USER_DOC_2",
+      "USER_DOC_DEMO"
+    ],
+    "VIT002": [
+      "USER_DOC_1",
+      "USER_DOC_DEMO"
+    ],
+    "VIT003": [
+      "USER_DOC_2",
+      "USER_DOC_DEMO"
+    ]
+  },
+  "auditLogs": [
+    {
+      "id": "LOG_1785328129398_405",
+      "timestamp": "2026-07-29T12:28:49.398Z",
+      "userId": "USER_DOC_DEMO",
+      "userName": "Dr. Aditi Sharma (Demo)",
+      "userRole": "doctor",
+      "action": "User Authentication",
+      "category": "Security",
+      "details": "Successful REST API login for user @doctor.demo (doctor)",
+      "ipAddress": "::1"
+    },
+    {
+      "id": "LOG_1001",
+      "timestamp": "2026-07-29T10:28:28.970Z",
+      "userId": "USER_ADMIN",
+      "userName": "System Administrator",
+      "userRole": "admin",
+      "action": "Doctor Account Approved",
+      "category": "User Management",
+      "details": "Approved NMC Registration NMC/2015/04/82910 for Dr. Aditi Sharma",
+      "ipAddress": "127.0.0.1"
+    },
+    {
+      "id": "LOG_1002",
+      "timestamp": "2026-07-29T07:28:28.972Z",
+      "userId": "USER_DOC_1",
+      "userName": "Dr. Aditi Sharma",
+      "userRole": "doctor",
+      "action": "Patient Record Accessed",
+      "category": "Clinical Data Access",
+      "details": "Viewed longitudinal health twin record for Patient ID: VIT001 (Arun Kumar)",
+      "ipAddress": "127.0.0.1"
+    }
+  ],
+  "otps": {
+    "shankarannarayanan19@gmail.com": {
+      "code": "854505",
+      "expiresAt": 1785328949410,
+      "createdAt": 1785328349411
+    }
+  }
+}
