@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Menu, LogOut, ArrowLeft, User, Bell } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
-import NotificationDrawer from './NotificationDrawer';
+import { Menu, LogOut, ArrowLeft, User } from 'lucide-react';
 
 export default function Navbar({ onMenuToggle, patientName }) {
   const navigate = useNavigate();
-  const { currentUser, logoutUser } = useAuth();
-  const role = currentUser?.role || localStorage.getItem("vitaiq_role") || "doctor";
-  const displayName = currentUser?.name || localStorage.getItem("vitaiq_user_name") || (role === "doctor" ? "Doctor" : "Patient");
-
-  const [notifOpen, setNotifOpen] = useState(false);
+  const role = localStorage.getItem("vitaiq_role") || "doctor";
 
   const handleLogout = () => {
-    logoutUser();
+    localStorage.removeItem("vitaiq_auth");
+    localStorage.removeItem("vitaiq_role");
+    localStorage.removeItem("vitaiq_patient_id");
     navigate("/", { replace: true });
   };
 
@@ -56,21 +52,6 @@ export default function Navbar({ onMenuToggle, patientName }) {
       </div>
 
       <div className="navbar-right">
-        {/* Notification Bell */}
-        <button
-          onClick={() => setNotifOpen(true)}
-          aria-label="Open Notifications"
-          style={{
-            position: 'relative',
-            display: 'flex',
-            alignItems: 'center',
-            color: 'var(--text-secondary)',
-            padding: '0.25rem'
-          }}
-        >
-          <Bell size={20} />
-        </button>
-
         <div 
           style={{ 
             display: 'flex', 
@@ -82,7 +63,7 @@ export default function Navbar({ onMenuToggle, patientName }) {
         >
           <User size={16} />
           <span style={{ fontWeight: 600, color: 'var(--navy-900)' }}>
-            {role === "doctor" ? displayName : patientName || displayName}
+            {role === "doctor" ? "Dr. Aditi Sharma" : patientName || "Patient"}
           </span>
         </div>
         <button 
@@ -100,8 +81,6 @@ export default function Navbar({ onMenuToggle, patientName }) {
           <span>Sign Out</span>
         </button>
       </div>
-
-      <NotificationDrawer isOpen={notifOpen} onClose={() => setNotifOpen(false)} />
     </header>
   );
 }

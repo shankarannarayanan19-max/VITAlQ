@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { useHealthRecord } from '../context/HealthRecordContext';
+import { getPatientById } from '../data/patients';
 import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
 import PatientProfileCard from '../components/PatientProfileCard';
@@ -12,9 +11,6 @@ import MedicalTimeline from '../components/MedicalTimeline';
 import RiskEngine from '../components/RiskEngine';
 import LabTrendChart from '../components/LabTrendChart';
 import ClinicalAlerts from '../components/ClinicalAlerts';
-import DocumentUploadModal from '../components/DocumentUploadModal';
-import AppointmentBookingModal from '../components/AppointmentBookingModal';
-import UpdatePatientModal from '../components/UpdatePatientModal';
 import Disclaimer from '../components/Disclaimer';
 import { 
   HeartPulse, 
@@ -24,29 +20,22 @@ import {
   AlertTriangle,
   ArrowLeft,
   Calendar,
-  CheckCircle2,
-  UploadCloud,
-  Edit,
-  Plus
+  CheckCircle2
 } from 'lucide-react';
 import '../styles/dashboard.css';
 
 export default function PatientDashboardPage() {
   const { id } = useParams();
-  const { currentUser, role } = useAuth();
-  const { patients } = useHealthRecord();
-
+  const [patient, setPatient] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('overview');
-  const [showUploadModal, setShowUploadModal] = useState(false);
-  const [showBookingModal, setShowBookingModal] = useState(false);
-  const [showUpdateModal, setShowUpdateModal] = useState(false);
 
-  const formattedId = id ? id.toUpperCase().trim() : "VIT001";
-  const patient = patients[formattedId] || patients["VIT001"];
+  useEffect(() => {
+    const loadedPatient = getPatientById(id);
+    setPatient(loadedPatient);
+  }, [id]);
 
-  const userRole = currentUser?.role || role || "doctor";
-
+  // Handle active section highlighting on scroll
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['overview', 'clinical-summary', 'timeline', 'risk-engine', 'lab-charts', 'alerts'];
@@ -77,7 +66,7 @@ export default function PatientDashboardPage() {
           <AlertTriangle size={48} style={{ color: 'var(--red-500)', marginBottom: '1rem' }} />
           <h2>Patient Digital Twin Not Found</h2>
           <p style={{ color: 'var(--text-secondary)', margin: '0.5rem 0 1.5rem', maxWidth: '360px' }}>
-            The record ID "{id}" does not correspond to any active patient profile in the registry. Try VIT001, VIT002, or VIT003.
+            The record ID "{id}" does not correspond to any synthetic patient twin in the registry. Try VIT001, VIT002, or VIT003.
           </p>
           <Link to="/patients" className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
             <ArrowLeft size={16} />
@@ -115,94 +104,153 @@ export default function PatientDashboardPage() {
       )}
 
       <div className="dashboard-main">
-        <Navbar 
-          onMenuToggle={() => setSidebarOpen(!sidebarOpen)} 
-          patientName={patient.name}
-        />
+        <Navbar onMenuToggle={() => setSidebarOpen(!sidebarOpen)} patientName={patient.name} />
 
-        <main className="dashboard-content" style={{ padding: '2rem' }}>
-          {/* Quick Doctor Actions Header Bar */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
-            <Link to="/patients" className="back-search-link">
-              <ArrowLeft size={16} />
-              <span>Back to Patient Registry</span>
-            </Link>
+        <div className="patient-header-section">
+          <PatientProfileCard patient={patient} />
+        </div>
 
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              <button 
-                className="btn btn-primary" 
-                onClick={() => setShowUpdateModal(true)}
-                style={{ fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}
-              >
-                <Edit size={16} />
-                <span>Update Medical Record</span>
-              </button>
-
-              <button 
-                className="btn btn-secondary" 
-                onClick={() => setShowUploadModal(true)}
-                style={{ fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}
-              >
-                <UploadCloud size={16} />
-                <span>Upload Report</span>
-              </button>
-
-              <button 
-                className="btn btn-secondary" 
-                onClick={() => setShowBookingModal(true)}
-                style={{ fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}
-              >
-                <Calendar size={16} />
-                <span>Schedule Follow-up</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Demographic Header Profile Card */}
-          <div id="overview">
-            <PatientProfileCard patient={patient} />
-          </div>
-
-          {/* Grid Layout Section */}
-          <div className="dashboard-grid">
+        <div className="dashboard-grid">
+          {/* Left Column: Records & Narrative Summary */}
+          <div className="dashboard-left-col">
             
-            {/* Left Column: AI Summary, Timeline, Lab Charts */}
-            <div className="dashboard-column-left">
-              <ClinicalSummary patient={patient} />
+            {/* Overview Widget */}
+            <section id="overview" className="widget-card" style={{ scrollMarginTop: '90px' }}>
+              <h3 className="widget-card-title">
+                <HeartPulse size={20} style={{ color: 'var(--teal-500)' }} />
+                <span>Twin Overview Details</span>
+              </h3>
 
-              <div id="timeline">
-                <MedicalTimeline timeline={patient.timeline} />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                {/* Diagnoses */}
+                <div>
+                  <h4 style={{ fontSize: '0.9rem', color: 'var(--navy-800)', fontWeight: 700, marginBottom: '0.5rem' }}>
+                    Diagnosed Conditions
+                  </h4>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                    {patient.conditions.map((condition, idx) => (
+                      <span 
+                        key={idx} 
+                        style={{ 
+                          fontSize: '0.85rem', 
+                          fontWeight: 550, 
+                          backgroundColor: 'var(--bg-main)', 
+                          border: '1.5px solid var(--border-color)', 
+                          padding: '0.35rem 0.75rem', 
+                          borderRadius: 'var(--radius-sm)',
+                          color: 'var(--navy-900)'
+                        }}
+                      >
+                        {condition}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Allergies */}
+                <div>
+                  <h4 style={{ fontSize: '0.9rem', color: 'var(--navy-800)', fontWeight: 700, marginBottom: '0.5rem' }}>
+                    Allergies Profile
+                  </h4>
+                  {patient.allergies.length === 0 ? (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: 'var(--green-600)', fontSize: '0.85rem', fontWeight: 550 }}>
+                      <CheckCircle2 size={16} />
+                      <span>No known drug or environmental allergies recorded.</span>
+                    </div>
+                  ) : (
+                    <div className="allergies-wrapper">
+                      {patient.allergies.map((allergy, idx) => (
+                        <AllergyBadge key={idx} allergy={allergy} />
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Active Prescriptions */}
+                <div>
+                  <h4 style={{ fontSize: '0.9rem', color: 'var(--navy-800)', fontWeight: 700, marginBottom: '0.5rem' }}>
+                    Active Prescriptions & Dosages
+                  </h4>
+                  <MedicationList medications={patient.medications} />
+                </div>
+
+                {/* Surgeries & Vaccinations row */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }} className="hide-mobile">
+                  <div>
+                    <h4 style={{ fontSize: '0.9rem', color: 'var(--navy-800)', fontWeight: 700, marginBottom: '0.5rem' }}>
+                      Surgical History
+                    </h4>
+                    {patient.surgeries.length === 0 ? (
+                      <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>No surgical records found.</p>
+                    ) : (
+                      <ul style={{ paddingLeft: '1.25rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                        {patient.surgeries.map((surg, idx) => (
+                          <li key={idx}>
+                            <strong>{surg.name}</strong> ({surg.year}) - <em>{surg.hospital}</em>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+
+                  <div>
+                    <h4 style={{ fontSize: '0.9rem', color: 'var(--navy-800)', fontWeight: 700, marginBottom: '0.5rem' }}>
+                      Immunizations
+                    </h4>
+                    <ul style={{ paddingLeft: '1.25rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                      {patient.vaccinations.map((vac, idx) => (
+                        <li key={idx}>
+                          <strong>{vac.name}</strong> - <em>{vac.date}</em>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Mobile version of Surgeries/Vaccinations */}
+                <div style={{ display: 'none' }} className="show-mobile-flex">
+                  <div style={{ marginBottom: '0.75rem' }}>
+                    <h4 style={{ fontSize: '0.9rem', color: 'var(--navy-800)', fontWeight: 700, marginBottom: '0.25rem' }}>Surgical History</h4>
+                    {patient.surgeries.map((s, idx) => (
+                      <div key={idx} style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{s.name} ({s.year})</div>
+                    ))}
+                  </div>
+                  <div>
+                    <h4 style={{ fontSize: '0.9rem', color: 'var(--navy-800)', fontWeight: 700, marginBottom: '0.25rem' }}>Immunizations</h4>
+                    {patient.vaccinations.map((v, idx) => (
+                      <div key={idx} style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{v.name} ({v.date})</div>
+                    ))}
+                  </div>
+                </div>
               </div>
+            </section>
 
-              <div id="lab-charts">
-                <LabTrendChart labTrends={patient.labTrends} />
-              </div>
-            </div>
+            {/* AI Summary Section */}
+            <ClinicalSummary patient={patient} />
 
-            {/* Right Column: Risk Engine, Allergies, Medications, Clinical Alerts */}
-            <div className="dashboard-column-right">
-              <div id="risk-engine">
-                <RiskEngine patient={patient} />
-              </div>
-
-              <AllergyBadge allergies={patient.allergies} />
-
-              <MedicationList medications={patient.medications} />
-
-              <div id="alerts">
-                <ClinicalAlerts patient={patient} />
-              </div>
-            </div>
+            {/* Timeline Section */}
+            <MedicalTimeline timeline={patient.timeline} />
 
           </div>
 
-          {/* Modals */}
-          <DocumentUploadModal isOpen={showUploadModal} onClose={() => setShowUploadModal(false)} patientId={patient.id} />
-          <AppointmentBookingModal isOpen={showBookingModal} onClose={() => setShowBookingModal(false)} defaultDoctorId={currentUser?.id} />
-          <UpdatePatientModal isOpen={showUpdateModal} onClose={() => setShowUpdateModal(false)} patient={patient} />
+          {/* Right Column: Calculations & Diagnostic Alerts */}
+          <div className="dashboard-right-col">
+            
+            {/* Future Risk Engine */}
+            <RiskEngine patient={patient} />
 
+            {/* Recharts Laboratory Trend Charts */}
+            <LabTrendChart labTrends={patient.labTrends} />
+
+            {/* Clinical Warnings & Referrals */}
+            <ClinicalAlerts patient={patient} />
+
+          </div>
+        </div>
+
+        <div style={{ padding: '0 2rem 2rem' }}>
           <Disclaimer />
-        </main>
+        </div>
       </div>
     </div>
   );

@@ -74,7 +74,7 @@ export default function PatientProfileCard({ patient }) {
           <span className="risk-pill" style={statusBadgeStyle}>{followUpStatus}</span>
         </div>
         <div style={{ fontSize: '0.7rem', color: 'var(--slate-400)', marginTop: '0.25rem' }}>
-          Verified Patient Record
+          * Synthetic contact info for demonstration
         </div>
       </div>
     </div>

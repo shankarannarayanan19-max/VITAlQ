@@ -89,33 +89,33 @@ export default function LandingPage() {
         <div className="hero-visual">
           <div className="visual-panel">
             <div className="visual-header">
-              <span className="visual-pill">Enterprise AI Architecture</span>
-              <span className="visual-badge">HIPAA Compliant</span>
+              <span className="visual-pill">Live patient overview</span>
+              <span className="visual-badge">Updated 2m ago</span>
             </div>
 
             <div className="visual-card">
-              <div className="visual-card-title">AI Digital Twin Intelligence Engine</div>
+              <div className="visual-card-title">Patient 4821</div>
               <div className="visual-metric-row">
                 <div className="metric-item">
-                  <span className="metric-label">Security</span>
-                  <span className="metric-value">AES-256</span>
+                  <span className="metric-label">HbA1c</span>
+                  <span className="metric-value">8.7%</span>
                 </div>
                 <div className="metric-item">
-                  <span className="metric-label">Pipeline</span>
-                  <span className="metric-value">Real-Time</span>
+                  <span className="metric-label">eGFR</span>
+                  <span className="metric-value">58</span>
                 </div>
                 <div className="metric-item">
-                  <span className="metric-label">Accuracy</span>
-                  <span className="metric-value">99.4%</span>
+                  <span className="metric-label">BP</span>
+                  <span className="metric-value">142/88</span>
                 </div>
               </div>
               <div className="visual-progress">
                 <div className="visual-progress-bar">
-                  <span style={{ width: '92%' }}></span>
+                  <span style={{ width: '78%' }}></span>
                 </div>
                 <div className="visual-progress-meta">
-                  <span>Clinical Decision Support Engine</span>
-                  <span>Active</span>
+                  <span>Risk trend rising</span>
+                  <span>78%</span>
                 </div>
               </div>
             </div>
@@ -123,15 +123,15 @@ export default function LandingPage() {
             <div className="visual-list">
               <div className="visual-list-item">
                 <Search size={16} />
-                <span>Predictive Risk Trajectory Modeling</span>
+                <span>Identify prior ED admissions</span>
               </div>
               <div className="visual-list-item">
                 <Activity size={16} />
-                <span>Automated EHR Harmonization & Timeline Synthesis</span>
+                <span>Highlight medication interaction risk</span>
               </div>
               <div className="visual-list-item">
                 <FileClock size={16} />
-                <span>Longitudinal Health Trend Analytics</span>
+                <span>Map historical interventions over time</span>
               </div>
             </div>
           </div>

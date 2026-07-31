@@ -6,27 +6,20 @@ import {
   XAxis, 
   YAxis, 
   CartesianGrid, 
-  Tooltip 
+  Tooltip, 
+  Legend 
 } from 'recharts';
-import { useTheme } from '../context/ThemeContext';
 import { LineChart as ChartIcon } from 'lucide-react';
 
 export default function LabTrendChart({ labTrends }) {
-  const { isDarkMode } = useTheme();
-
-  const axisColor = isDarkMode ? '#cbd5e1' : '#475569';
-  const gridColor = isDarkMode ? '#26334d' : '#e2e8f0';
-  const tooltipBg = isDarkMode ? '#1e293b' : '#0f172a';
-  const tooltipTextColor = '#ffffff';
-
   if (!labTrends || !labTrends.dates) {
     return (
       <div className="widget-card" id="lab-charts" style={{ scrollMarginTop: '90px' }}>
         <h3 className="widget-card-title">
           <ChartIcon size={20} />
-          <span>Disease-Specific Condition Trends</span>
+          <span>Longitudinal Laboratory Trends</span>
         </h3>
-        <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>No trend data registered for this profile.</p>
+        <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>No trend data registered.</p>
       </div>
     );
   }
@@ -36,206 +29,209 @@ export default function LabTrendChart({ labTrends }) {
     const dataObj = { date };
     if (labTrends.hba1c) dataObj.hba1c = labTrends.hba1c[idx];
     if (labTrends.egfr) dataObj.egfr = labTrends.egfr[idx];
-    if (labTrends.creatinine) dataObj.creatinine = labTrends.creatinine[idx];
-    if (labTrends.pefr) dataObj.pefr = labTrends.pefr[idx];
-    if (labTrends.fev1Fvc) dataObj.fev1Fvc = labTrends.fev1Fvc[idx];
     if (labTrends.systolicBP) dataObj.systolic = labTrends.systolicBP[idx];
     if (labTrends.diastolicBP) dataObj.diastolic = labTrends.diastolicBP[idx];
     if (labTrends.ldl) dataObj.ldl = labTrends.ldl[idx];
-    if (labTrends.hemoglobin) dataObj.hemoglobin = labTrends.hemoglobin[idx];
-    if (labTrends.fastingGlucose) dataObj.fastingGlucose = labTrends.fastingGlucose[idx];
-    if (labTrends.tsh) dataObj.tsh = labTrends.tsh[idx];
-    if (labTrends.alt) dataObj.alt = labTrends.alt[idx];
     return dataObj;
   });
+
+  const latestHba1c = labTrends.hba1c ? labTrends.hba1c[labTrends.hba1c.length - 1] : null;
+  const latestEgfr = labTrends.egfr ? labTrends.egfr[labTrends.egfr.length - 1] : null;
+  const latestSys = labTrends.systolicBP ? labTrends.systolicBP[labTrends.systolicBP.length - 1] : null;
+  const latestDia = labTrends.diastolicBP ? labTrends.diastolicBP[labTrends.diastolicBP.length - 1] : null;
+  const latestLdl = labTrends.ldl ? labTrends.ldl[labTrends.ldl.length - 1] : null;
 
   return (
     <section id="lab-charts" className="widget-card" style={{ scrollMarginTop: '90px' }}>
       <h3 className="widget-card-title">
         <ChartIcon size={20} style={{ color: 'var(--teal-500)' }} />
-        <span>Condition-Specific Diagnostic Trends</span>
+        <span>Longitudinal Laboratory Trends</span>
       </h3>
 
       <div className="charts-grid">
-        {/* 1. HbA1c Chart (Diabetes) */}
+        {/* 1. HbA1c Chart */}
         {labTrends.hba1c && (
           <div className="chart-card">
             <h4 className="chart-card-title">HbA1c (Glycated Hemoglobin)</h4>
             <div className="chart-val-display">
-              <span className="chart-val-num">{labTrends.hba1c[labTrends.hba1c.length - 1]}%</span>
+              <span className="chart-val-num">{latestHba1c}%</span>
               <span className="chart-val-unit">Target: &lt; 7.0%</span>
-              <span className="risk-pill" style={{
-                marginLeft: 'auto',
-                fontSize: '0.7rem',
-                padding: '0.15rem 0.55rem',
-                borderRadius: 'var(--radius-full)',
-                fontWeight: 700,
-                backgroundColor: labTrends.hba1c[labTrends.hba1c.length - 1] > 8.0 ? 'var(--red-50)' : 'var(--green-55)',
-                color: labTrends.hba1c[labTrends.hba1c.length - 1] > 8.0 ? 'var(--red-600)' : 'var(--green-600)'
-              }}>
-                {labTrends.hba1c[labTrends.hba1c.length - 1] > 8.0 ? 'Elevated Glycemic Trend' : 'Controlled'}
+              <span 
+                className="risk-pill" 
+                style={{ 
+                  marginLeft: 'auto', 
+                  fontSize: '0.7rem',
+                  backgroundColor: latestHba1c > 8.0 ? 'var(--red-50)' : 'var(--green-55)',
+                  color: latestHba1c > 8.0 ? 'var(--red-600)' : 'var(--green-600)' 
+                }}
+              >
+                {latestHba1c > 8.0 ? 'Elevated Glycemic Trend' : 'Controlled'}
               </span>
             </div>
             <div className="chart-wrapper">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-                  <XAxis dataKey="date" stroke={axisColor} style={{ fontSize: '0.8rem' }} />
-                  <YAxis domain={[4, 11]} stroke={axisColor} style={{ fontSize: '0.8rem' }} />
-                  <Tooltip contentStyle={{ backgroundColor: tooltipBg, color: tooltipTextColor, borderRadius: '8px', border: '1px solid var(--border-color)' }} />
-                  <Line type="monotone" dataKey="hba1c" stroke="var(--red-500)" strokeWidth={3} dot={{ r: 5 }} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" />
+                  <XAxis dataKey="date" stroke="var(--text-secondary)" style={{ fontSize: '0.8rem' }} />
+                  <YAxis domain={[4, 10]} stroke="var(--text-secondary)" style={{ fontSize: '0.8rem' }} />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'var(--navy-900)', color: '#fff', borderRadius: 'var(--radius-sm)', border: 'none' }}
+                    labelStyle={{ fontWeight: 'bold' }}
+                  />
+                  <Legend wrapperStyle={{ fontSize: '0.85rem', paddingTop: '10px' }} />
+                  <Line 
+                    type="monotone" 
+                    dataKey="hba1c" 
+                    name="HbA1c Level" 
+                    stroke="var(--teal-500)" 
+                    strokeWidth={3} 
+                    activeDot={{ r: 8 }} 
+                  />
                 </LineChart>
               </ResponsiveContainer>
             </div>
           </div>
         )}
 
-        {/* 2. eGFR Chart (Kidney Function / CKD) */}
+        {/* 2. Kidney eGFR Chart */}
         {labTrends.egfr && (
           <div className="chart-card">
-            <h4 className="chart-card-title">eGFR (Kidney Filtration Rate)</h4>
+            <h4 className="chart-card-title">eGFR (Glomerular Filtration Rate)</h4>
             <div className="chart-val-display">
-              <span className="chart-val-num">{labTrends.egfr[labTrends.egfr.length - 1]}</span>
-              <span className="chart-val-unit">mL/min/1.73m² (Target &gt; 90)</span>
-              <span className="risk-pill" style={{
-                marginLeft: 'auto',
-                fontSize: '0.7rem',
-                padding: '0.15rem 0.55rem',
-                borderRadius: 'var(--radius-full)',
-                fontWeight: 700,
-                backgroundColor: labTrends.egfr[labTrends.egfr.length - 1] < 60 ? 'var(--red-50)' : labTrends.egfr[labTrends.egfr.length - 1] < 90 ? 'var(--amber-50)' : 'var(--green-55)',
-                color: labTrends.egfr[labTrends.egfr.length - 1] < 60 ? 'var(--red-600)' : labTrends.egfr[labTrends.egfr.length - 1] < 90 ? 'var(--amber-600)' : 'var(--green-600)'
-              }}>
-                {labTrends.egfr[labTrends.egfr.length - 1] < 60 ? 'Impaired Filtration' : labTrends.egfr[labTrends.egfr.length - 1] < 90 ? 'Borderline Decline' : 'Healthy'}
+              <span className="chart-val-num">{latestEgfr}</span>
+              <span className="chart-val-unit">mL/min/1.73m² (Target: &gt; 90)</span>
+              <span 
+                className="risk-pill" 
+                style={{ 
+                  marginLeft: 'auto', 
+                  fontSize: '0.7rem',
+                  backgroundColor: latestEgfr < 60 ? 'var(--red-50)' : (latestEgfr < 90 ? 'var(--amber-50)' : 'var(--green-55)'),
+                  color: latestEgfr < 60 ? 'var(--red-600)' : (latestEgfr < 90 ? 'var(--amber-600)' : 'var(--green-600)')
+                }}
+              >
+                {latestEgfr < 60 ? 'Impaired Filtration' : (latestEgfr < 90 ? 'Borderline decline' : 'Healthy')}
               </span>
             </div>
             <div className="chart-wrapper">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-                  <XAxis dataKey="date" stroke={axisColor} style={{ fontSize: '0.8rem' }} />
-                  <YAxis domain={[40, 110]} stroke={axisColor} style={{ fontSize: '0.8rem' }} />
-                  <Tooltip contentStyle={{ backgroundColor: tooltipBg, color: tooltipTextColor, borderRadius: '8px', border: '1px solid var(--border-color)' }} />
-                  <Line type="monotone" dataKey="egfr" stroke="var(--teal-500)" strokeWidth={3} dot={{ r: 5 }} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" />
+                  <XAxis dataKey="date" stroke="var(--text-secondary)" style={{ fontSize: '0.8rem' }} />
+                  <YAxis domain={[40, 110]} stroke="var(--text-secondary)" style={{ fontSize: '0.8rem' }} />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'var(--navy-900)', color: '#fff', borderRadius: 'var(--radius-sm)', border: 'none' }}
+                    labelStyle={{ fontWeight: 'bold' }}
+                  />
+                  <Legend wrapperStyle={{ fontSize: '0.85rem', paddingTop: '10px' }} />
+                  <Line 
+                    type="monotone" 
+                    dataKey="egfr" 
+                    name="eGFR (Renal)" 
+                    stroke="#2563eb" 
+                    strokeWidth={3} 
+                    activeDot={{ r: 8 }} 
+                  />
                 </LineChart>
               </ResponsiveContainer>
             </div>
           </div>
         )}
 
-        {/* 3. PEFR & Spirometry Chart (Asthma / Pulmonology) */}
-        {labTrends.pefr && (
-          <div className="chart-card">
-            <h4 className="chart-card-title">Peak Expiratory Flow Rate (PEFR)</h4>
-            <div className="chart-val-display">
-              <span className="chart-val-num">{labTrends.pefr[labTrends.pefr.length - 1]} L/min</span>
-              <span className="chart-val-unit">Normal &gt; 400 L/min</span>
-            </div>
-            <div className="chart-wrapper">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-                  <XAxis dataKey="date" stroke={axisColor} style={{ fontSize: '0.8rem' }} />
-                  <YAxis domain={[300, 500]} stroke={axisColor} style={{ fontSize: '0.8rem' }} />
-                  <Tooltip contentStyle={{ backgroundColor: tooltipBg, color: tooltipTextColor, borderRadius: '8px', border: '1px solid var(--border-color)' }} />
-                  <Line type="monotone" dataKey="pefr" stroke="var(--teal-500)" strokeWidth={3} dot={{ r: 5 }} />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-        )}
-
-        {/* 4. Hemoglobin Trend Chart (Obstetrics & Anemia) */}
-        {labTrends.hemoglobin && (
-          <div className="chart-card">
-            <h4 className="chart-card-title">Hemoglobin Level (g/dL)</h4>
-            <div className="chart-val-display">
-              <span className="chart-val-num">{labTrends.hemoglobin[labTrends.hemoglobin.length - 1]} g/dL</span>
-              <span className="chart-val-unit">Target &gt; 11.0 g/dL</span>
-            </div>
-            <div className="chart-wrapper">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-                  <XAxis dataKey="date" stroke={axisColor} style={{ fontSize: '0.8rem' }} />
-                  <YAxis domain={[8, 16]} stroke={axisColor} style={{ fontSize: '0.8rem' }} />
-                  <Tooltip contentStyle={{ backgroundColor: tooltipBg, color: tooltipTextColor, borderRadius: '8px', border: '1px solid var(--border-color)' }} />
-                  <Line type="monotone" dataKey="hemoglobin" stroke="#ec4899" strokeWidth={3} dot={{ r: 5 }} />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-        )}
-
-        {/* 5. Blood Pressure Chart */}
+        {/* 3. Blood Pressure Chart */}
         {labTrends.systolicBP && (
           <div className="chart-card">
-            <h4 className="chart-card-title">Blood Pressure Trends (mmHg)</h4>
+            <h4 className="chart-card-title">Blood Pressure Trend</h4>
             <div className="chart-val-display">
-              <span className="chart-val-num">
-                {labTrends.systolicBP[labTrends.systolicBP.length - 1]}/{labTrends.diastolicBP[labTrends.diastolicBP.length - 1]}
-              </span>
-              <span className="chart-val-unit">Target &lt; 130/80 mmHg</span>
-              <span className="risk-pill" style={{
-                marginLeft: 'auto',
-                fontSize: '0.7rem',
-                padding: '0.15rem 0.55rem',
-                borderRadius: 'var(--radius-full)',
-                fontWeight: 700,
-                backgroundColor: labTrends.systolicBP[labTrends.systolicBP.length - 1] >= 140 ? 'var(--red-50)' : labTrends.systolicBP[labTrends.systolicBP.length - 1] > 120 ? 'var(--amber-50)' : 'var(--green-55)',
-                color: labTrends.systolicBP[labTrends.systolicBP.length - 1] >= 140 ? 'var(--red-600)' : labTrends.systolicBP[labTrends.systolicBP.length - 1] > 120 ? 'var(--amber-600)' : 'var(--green-600)'
-              }}>
-                {labTrends.systolicBP[labTrends.systolicBP.length - 1] >= 140 ? 'Stage 2 Hypertension' : labTrends.systolicBP[labTrends.systolicBP.length - 1] > 120 ? 'Elevated' : 'Optimal'}
+              <span className="chart-val-num">{latestSys}/{latestDia}</span>
+              <span className="chart-val-unit">mmHg (Target: &lt; 130/80)</span>
+              <span 
+                className="risk-pill" 
+                style={{ 
+                  marginLeft: 'auto', 
+                  fontSize: '0.7rem',
+                  backgroundColor: latestSys >= 140 ? 'var(--red-50)' : (latestSys > 120 ? 'var(--amber-50)' : 'var(--green-55)'),
+                  color: latestSys >= 140 ? 'var(--red-600)' : (latestSys > 120 ? 'var(--amber-600)' : 'var(--green-600)')
+                }}
+              >
+                {latestSys >= 140 ? 'Stage 2 Hypertension' : (latestSys > 120 ? 'Elevated' : 'Optimal')}
               </span>
             </div>
             <div className="chart-wrapper">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-                  <XAxis dataKey="date" stroke={axisColor} style={{ fontSize: '0.8rem' }} />
-                  <YAxis domain={[60, 180]} stroke={axisColor} style={{ fontSize: '0.8rem' }} />
-                  <Tooltip contentStyle={{ backgroundColor: tooltipBg, color: tooltipTextColor, borderRadius: '8px', border: '1px solid var(--border-color)' }} />
-                  <Line type="monotone" dataKey="systolic" stroke="var(--amber-500)" strokeWidth={3} dot={{ r: 5 }} name="Systolic" />
-                  <Line type="monotone" dataKey="diastolic" stroke="var(--teal-500)" strokeWidth={2} dot={{ r: 4 }} name="Diastolic" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" />
+                  <XAxis dataKey="date" stroke="var(--text-secondary)" style={{ fontSize: '0.8rem' }} />
+                  <YAxis domain={[60, 180]} stroke="var(--text-secondary)" style={{ fontSize: '0.8rem' }} />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'var(--navy-900)', color: '#fff', borderRadius: 'var(--radius-sm)', border: 'none' }}
+                    labelStyle={{ fontWeight: 'bold' }}
+                  />
+                  <Legend wrapperStyle={{ fontSize: '0.85rem', paddingTop: '10px' }} />
+                  <Line 
+                    type="monotone" 
+                    dataKey="systolic" 
+                    name="Systolic BP" 
+                    stroke="var(--red-500)" 
+                    strokeWidth={2.5} 
+                    activeDot={{ r: 6 }} 
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="diastolic" 
+                    name="Diastolic BP" 
+                    stroke="var(--amber-500)" 
+                    strokeWidth={2.5} 
+                    activeDot={{ r: 6 }} 
+                  />
                 </LineChart>
               </ResponsiveContainer>
             </div>
           </div>
         )}
 
-        {/* 6. LDL Lipid Chart */}
+        {/* 4. LDL Chart if present (for patient VIT003) */}
         {labTrends.ldl && (
           <div className="chart-card">
-            <h4 className="chart-card-title">LDL Cholesterol (mg/dL)</h4>
+            <h4 className="chart-card-title">LDL Cholesterol Trend</h4>
             <div className="chart-val-display">
-              <span className="chart-val-num">{labTrends.ldl[labTrends.ldl.length - 1]} mg/dL</span>
-              <span className="chart-val-unit">Target &lt; 100 mg/dL</span>
-              <span className="risk-pill" style={{
-                marginLeft: 'auto',
-                fontSize: '0.7rem',
-                padding: '0.15rem 0.55rem',
-                borderRadius: 'var(--radius-full)',
-                fontWeight: 700,
-                backgroundColor: labTrends.ldl[labTrends.ldl.length - 1] > 130 ? 'var(--red-50)' : 'var(--green-55)',
-                color: labTrends.ldl[labTrends.ldl.length - 1] > 130 ? 'var(--red-600)' : 'var(--green-600)'
-              }}>
-                {labTrends.ldl[labTrends.ldl.length - 1] > 130 ? 'Hyperlipidemia Drift' : 'Optimal'}
+              <span className="chart-val-num">{latestLdl} mg/dL</span>
+              <span className="chart-val-unit">Target: &lt; 100 mg/dL</span>
+              <span 
+                className="risk-pill" 
+                style={{ 
+                  marginLeft: 'auto', 
+                  fontSize: '0.7rem',
+                  backgroundColor: latestLdl > 130 ? 'var(--red-50)' : 'var(--green-55)',
+                  color: latestLdl > 130 ? 'var(--red-600)' : 'var(--green-600)' 
+                }}
+              >
+                {latestLdl > 130 ? 'Hyperlipidemia Drift' : 'Optimal'}
               </span>
             </div>
             <div className="chart-wrapper">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-                  <XAxis dataKey="date" stroke={axisColor} style={{ fontSize: '0.8rem' }} />
-                  <YAxis domain={[80, 200]} stroke={axisColor} style={{ fontSize: '0.8rem' }} />
-                  <Tooltip contentStyle={{ backgroundColor: tooltipBg, color: tooltipTextColor, borderRadius: '8px', border: '1px solid var(--border-color)' }} />
-                  <Line type="monotone" dataKey="ldl" stroke="var(--amber-600)" strokeWidth={3} dot={{ r: 5 }} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" />
+                  <XAxis dataKey="date" stroke="var(--text-secondary)" style={{ fontSize: '0.8rem' }} />
+                  <YAxis domain={[90, 180]} stroke="var(--text-secondary)" style={{ fontSize: '0.8rem' }} />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'var(--navy-900)', color: '#fff', borderRadius: 'var(--radius-sm)', border: 'none' }}
+                    labelStyle={{ fontWeight: 'bold' }}
+                  />
+                  <Legend wrapperStyle={{ fontSize: '0.85rem', paddingTop: '10px' }} />
+                  <Line 
+                    type="monotone" 
+                    dataKey="ldl" 
+                    name="LDL Level" 
+                    stroke="#a855f7" 
+                    strokeWidth={3} 
+                    activeDot={{ r: 8 }} 
+                  />
                 </LineChart>
               </ResponsiveContainer>
             </div>
           </div>
         )}
-
       </div>
     </section>
   );
