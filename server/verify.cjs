@@ -17,7 +17,7 @@ function request(method, path, body, token) {
 }
 
 async function main() {
-  // Login
+  // Login as admin
   const login = await request('POST', '/api/auth/login', { username: 'admin', password: 'admin123' });
   console.log('=== LOGIN ===');
   console.log('Status:', login.status);
