@@ -1854,6 +1854,17 @@
   },
   "auditLogs": [
     {
+      "id": "LOG_1785512585604_526",
+      "timestamp": "2026-07-31T15:43:05.604Z",
+      "userId": "USER_ADMIN",
+      "userName": "System Administrator",
+      "userRole": "admin",
+      "action": "User Authentication",
+      "category": "Security",
+      "details": "Successful REST API login for user @admin.vitaiq (admin)",
+      "ipAddress": "::1"
+    },
+    {
       "id": "LOG_1785481694960_961",
       "timestamp": "2026-07-31T07:08:14.960Z",
       "userId": "USER_ADMIN",
