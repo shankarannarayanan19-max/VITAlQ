@@ -1,7 +1,3 @@
-// VITAIQ Server Seed Data — Schema A (canonical, matches src/data/patientsData.js)
-// All patient records use: labTrends (parallel arrays), timeline (description/location/doctorName),
-// medications (purpose field), allergies (substance/type/severity/reaction)
-
 export const SEED_PATIENTS = {
   "VIT001": {
     "id": "VIT001",
