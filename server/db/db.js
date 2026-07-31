@@ -12,6 +12,14 @@ import {
   SEED_CONNECTIONS,
   SEED_AUDIT_LOGS
 } from './seedData.js';
+import {
+  SEED_PATIENT_VIT004,
+  SEED_USER_ROSHINI,
+  SEED_APPOINTMENTS_ROSHINI,
+  SEED_NOTIFICATIONS_ROSHINI,
+  SEED_CONNECTIONS_ROSHINI,
+  SEED_AUDIT_LOGS_ROSHINI
+} from './roshiniSeed.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,14 +34,14 @@ if (!fs.existsSync(dbDir)) {
 
 // Initial Database Structure
 const initialDb = {
-  users: SEED_USERS,
-  patients: SEED_PATIENTS,
+  users: [...SEED_USERS, SEED_USER_ROSHINI],
+  patients: { ...SEED_PATIENTS, [SEED_PATIENT_VIT004.id]: SEED_PATIENT_VIT004 },
   hospitals: SEED_HOSPITALS,
   departments: SEED_DEPARTMENTS,
-  appointments: SEED_APPOINTMENTS,
-  notifications: SEED_NOTIFICATIONS,
-  connections: SEED_CONNECTIONS,
-  auditLogs: SEED_AUDIT_LOGS,
+  appointments: [...SEED_APPOINTMENTS, ...SEED_APPOINTMENTS_ROSHINI],
+  notifications: [...SEED_NOTIFICATIONS, ...SEED_NOTIFICATIONS_ROSHINI],
+  connections: { ...SEED_CONNECTIONS, ...SEED_CONNECTIONS_ROSHINI },
+  auditLogs: [...SEED_AUDIT_LOGS, ...SEED_AUDIT_LOGS_ROSHINI],
   otps: {}
 };
 
