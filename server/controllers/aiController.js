@@ -13,8 +13,16 @@ export const generateClinicalSummary = async (req, res) => {
     }
 
     // AI Clinical decision support generator logic
-    const { name, age, gender, conditions = [], vitals = {}, labHistory = [], riskLevel = 'Low' } = patient;
-    const latestLab = labHistory.length > 0 ? labHistory[labHistory.length - 1] : {};
+    const { name, age, gender, conditions = [], vitals = {}, labTrends = {}, riskLevel = 'Low' } = patient;
+
+    // Read latest values from schema A parallel arrays
+    const lastIdx = labTrends.dates ? labTrends.dates.length - 1 : -1;
+    const latestHba1c   = lastIdx >= 0 && labTrends.hba1c      ? labTrends.hba1c[lastIdx]      : null;
+    const latestEgfr    = lastIdx >= 0 && labTrends.egfr        ? labTrends.egfr[lastIdx]        : null;
+    const latestCr      = lastIdx >= 0 && labTrends.creatinine  ? labTrends.creatinine[lastIdx]  : null;
+    const latestSysBP   = lastIdx >= 0 && labTrends.systolicBP  ? labTrends.systolicBP[lastIdx]  : null;
+    const latestDiasBP  = lastIdx >= 0 && labTrends.diastolicBP ? labTrends.diastolicBP[lastIdx] : null;
+    const latestLdl     = lastIdx >= 0 && labTrends.ldl         ? labTrends.ldl[lastIdx]         : null;
 
     let summaryText = `${name} is a ${age}-year-old ${gender.toLowerCase()}`;
     if (conditions.length > 0) {
@@ -27,8 +35,13 @@ export const generateClinicalSummary = async (req, res) => {
       summaryText += ` Current vital assessment indicates Blood Pressure of ${vitals.bloodPressure} and Heart Rate of ${vitals.heartRate || '75 bpm'}.`;
     }
 
-    if (latestLab.hba1c) {
-      summaryText += ` Longitudinal laboratory analysis shows HbA1c at ${latestLab.hba1c}%, eGFR at ${latestLab.eGFR || 'N/A'} mL/min/1.73m², and Serum Creatinine at ${latestLab.creatinine || 'N/A'} mg/dL.`;
+    if (latestHba1c !== null) {
+      summaryText += ` Longitudinal laboratory analysis shows HbA1c at ${latestHba1c}%`;
+      if (latestEgfr !== null)  summaryText += `, eGFR at ${latestEgfr} mL/min/1.73m²`;
+      if (latestCr !== null)    summaryText += `, Serum Creatinine at ${latestCr} mg/dL`;
+      if (latestSysBP !== null) summaryText += `, BP ${latestSysBP}/${latestDiasBP ?? '?'} mmHg`;
+      if (latestLdl !== null)   summaryText += `, LDL ${latestLdl} mg/dL`;
+      summaryText += '.';
     }
 
     if (riskLevel === 'High') {

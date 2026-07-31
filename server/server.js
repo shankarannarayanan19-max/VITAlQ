@@ -15,8 +15,19 @@ import aiRoutes from './routes/aiRoutes.js';
 const app = express();
 
 // Middleware
+const allowedOrigins = [
+  'http://localhost:5173',  // Vite dev server
+  'http://localhost:4173',  // Vite preview
+  process.env.FRONTEND_URL  // production URL from env
+].filter(Boolean);
+
 app.use(cors({
-  origin: '*', // Allow all origins for dev flexibility
+  origin: (origin, callback) => {
+    // Allow requests with no origin (curl, Postman, server-to-server)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    callback(new Error(`CORS: Origin '${origin}' not allowed`));
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
@@ -62,7 +73,9 @@ app.use((err, req, res, next) => {
 });
 
 // Start Express Server
-app.listen(config.port, () => {
+app.listen(config.port, async () => {
+  // Migrate any leftover plaintext passwords to bcrypt hashes on first boot
+  await db.migratePlaintextPasswords();
   console.log(`=======================================================`);
   console.log(`🚀 VITAIQ Enterprise REST API Server is running!`);
   console.log(`🌐 Server URL: http://localhost:${config.port}`);

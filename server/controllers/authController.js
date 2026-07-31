@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 import { config } from '../config.js';
 import { db } from '../db/db.js';
 
@@ -20,8 +21,10 @@ export const login = async (req, res) => {
       return res.status(403).json({ success: false, message: 'This account has been suspended by the Hospital Administrator.' });
     }
 
-    // Simple matching for demo; supports plain text or hashed password
-    const isPasswordValid = (user.passwordHash === password) || (password === 'demo123');
+    // Verify password with bcrypt (falls back to plain-text equality for legacy seeds)
+    const isPasswordValid = user.passwordHash
+      ? (await bcrypt.compare(password, user.passwordHash).catch(() => false)) || user.passwordHash === password
+      : false;
     if (!isPasswordValid) {
       return res.status(401).json({ success: false, message: 'Invalid password. Please verify credentials.' });
     }
@@ -85,12 +88,13 @@ export const registerDoctor = async (req, res) => {
     }
 
     const newDocId = `USER_DOC_${Date.now()}`;
+    const hashedPassword = await bcrypt.hash(doctorDetails.password || 'VitaIQ@2026', 12);
     const newDoctor = {
       id: newDocId,
       username: username.toLowerCase().trim(),
       email: email.toLowerCase().trim(),
       role: 'doctor',
-      passwordHash: doctorDetails.password || 'demo123',
+      passwordHash: hashedPassword,
       name: doctorDetails.name || `Dr. ${username}`,
       avatar: doctorDetails.avatar || 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&auto=format&fit=crop&q=80',
       nmcNumber: doctorDetails.nmcNumber,
@@ -171,6 +175,7 @@ export const registerPatient = async (req, res) => {
 
     const newPatId = `VIT00${Math.floor(10 + Math.random() * 90)}`;
     const newUserId = `USER_PAT_${Date.now()}`;
+    const hashedPassword = await bcrypt.hash(patientDetails.password || 'VitaIQ@2026', 12);
 
     const newPatientRecord = {
       id: newPatId,
@@ -196,11 +201,24 @@ export const registerPatient = async (req, res) => {
         bloodGlucose: '95 mg/dL'
       },
       medications: [],
-      labHistory: [
-        { date: new Date().toISOString().split('T')[0], hba1c: 5.4, eGFR: 100, creatinine: 0.8, systolic: 120, diastolic: 80, ldl: 90 }
-      ],
+      labTrends: {
+        dates: [new Date().toISOString().split('T')[0]],
+        hba1c: [5.4],
+        egfr: [100],
+        creatinine: [0.8],
+        systolicBP: [120],
+        diastolicBP: [80],
+        ldl: [90]
+      },
       timeline: [
-        { date: new Date().toISOString().split('T')[0], type: 'Registration', title: 'Digital Patient Twin Created', doctor: 'VITAIQ System', hospital: 'VITAIQ Network', notes: 'Baseline twin digital record initialized.' }
+        {
+          date: new Date().toISOString().split('T')[0],
+          type: 'Registration',
+          title: 'Digital Patient Twin Created',
+          description: 'Baseline digital twin record initialized on the VITAIQ platform.',
+          location: 'VITAIQ Network',
+          doctorName: 'VITAIQ System'
+        }
       ],
       alerts: [
         { type: 'Info', title: 'Account Initialized', message: 'Digital Twin Record created successfully.', severity: 'low' }
@@ -214,7 +232,7 @@ export const registerPatient = async (req, res) => {
       id: newUserId,
       username: username.toLowerCase().trim(),
       email: email.toLowerCase().trim(),
-      passwordHash: patientDetails.password || 'demo123',
+      passwordHash: hashedPassword,
       role: 'patient',
       name: patientDetails.name || username,
       patientId: newPatId,
@@ -278,8 +296,7 @@ export const sendOtp = async (req, res) => {
 
     return res.json({
       success: true,
-      message: `Verification code sent to ${email}`,
-      otpPreview: code // Returned for quick dev/testing convenience
+      message: `Verification code sent to ${email}`
     });
   } catch (err) {
     console.error('Send OTP error:', err);

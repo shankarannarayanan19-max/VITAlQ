@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import bcrypt from 'bcryptjs';
 import {
   SEED_PATIENTS,
   SEED_USERS,
@@ -53,6 +54,21 @@ class JSONDatabase {
     // Save initial dataset if file not existing or corrupted
     this.saveData(initialDb);
     return initialDb;
+  }
+
+  // Hash any plaintext passwords still stored (idempotent — bcrypt hashes start with '$2')
+  async migratePlaintextPasswords() {
+    let changed = false;
+    for (const user of this.data.users) {
+      if (user.passwordHash && !user.passwordHash.startsWith('$2')) {
+        user.passwordHash = await bcrypt.hash(user.passwordHash, 12);
+        changed = true;
+      }
+    }
+    if (changed) {
+      this.save();
+      console.log('[DB] Migrated plaintext passwords to bcrypt hashes.');
+    }
   }
 
   saveData(dataToSave) {

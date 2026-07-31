@@ -82,9 +82,9 @@ export const addTimelineEvent = async (req, res) => {
       date: req.body.date || new Date().toISOString().split('T')[0],
       type: req.body.type || 'Consultation',
       title: req.body.title || 'Clinical Encounter',
-      doctor: req.body.doctor || (req.user ? req.user.name : 'Attending Physician'),
-      hospital: req.body.hospital || 'VITAIQ Clinic Network',
-      notes: req.body.notes || ''
+      description: req.body.description || req.body.notes || '',
+      location: req.body.location || req.body.hospital || 'VITAIQ Clinic Network',
+      doctorName: req.body.doctorName || req.body.doctor || (req.user ? req.user.name : 'Attending Physician')
     };
 
     patient.timeline = [newEvent, ...(patient.timeline || [])];

@@ -359,3 +359,267 @@ export const SEED_DOCTORS = [
     createdAt: "2025-02-15"
   }
 ];
+
+export const SEED_USERS = [
+  {
+    id: "USER_ADMIN",
+    username: "admin.vitaiq",
+    email: "admin@vitaiq.health",
+    passwordHash: "demo123",
+    role: "admin",
+    name: "System Administrator",
+    avatar: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&auto=format&fit=crop&q=80",
+    verified: true,
+    createdAt: "2025-01-01"
+  },
+  {
+    id: "USER_DOC_1",
+    username: "dr.aditisharma",
+    email: "aditi.sharma@apollo.org",
+    passwordHash: "demo123",
+    role: "doctor",
+    name: "Dr. Aditi Sharma",
+    avatar: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&auto=format&fit=crop&q=80",
+    nmcNumber: "NMC/2015/04/82910",
+    specialty: "Endocrinology",
+    qualification: "MD (Medicine), DM (Endocrinology)",
+    experience: 12,
+    hospitalName: "Apollo Hospitals",
+    department: "Endocrinology",
+    designation: "Senior Consultant Endocrinologist",
+    city: "Chennai",
+    state: "Tamil Nadu",
+    verificationStatus: "Approved",
+    verified: true,
+    createdAt: "2025-01-10"
+  },
+  {
+    id: "USER_DOC_2",
+    username: "dr.rajeshvarma",
+    email: "rajesh.varma@fortis.org",
+    passwordHash: "demo123",
+    role: "doctor",
+    name: "Dr. Rajesh Varma",
+    avatar: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=150&auto=format&fit=crop&q=80",
+    nmcNumber: "NMC/2012/08/44312",
+    specialty: "Cardiology",
+    qualification: "MBBS, MD, DM (Cardiology)",
+    experience: 15,
+    hospitalName: "Fortis Healthcare",
+    department: "Cardiology",
+    designation: "Chief Interventional Cardiologist",
+    city: "Bengaluru",
+    state: "Karnataka",
+    verificationStatus: "Approved",
+    verified: true,
+    createdAt: "2025-02-01"
+  },
+  {
+    id: "USER_DOC_3",
+    username: "dr.kavitareddy",
+    email: "kavita.reddy@manipal.org",
+    passwordHash: "demo123",
+    role: "doctor",
+    name: "Dr. Kavita Reddy",
+    avatar: "https://images.unsplash.com/photo-1594824813566-8885557d0d08?w=150&auto=format&fit=crop&q=80",
+    nmcNumber: "NMC/2011/05/29182",
+    specialty: "Obstetrics & Gynecology",
+    qualification: "MBBS, MD, DGO, FRCOG",
+    experience: 16,
+    hospitalName: "Manipal Hospital",
+    department: "Obstetrics & Gynecology",
+    designation: "Head of Obstetrics & Maternal Health",
+    city: "Hyderabad",
+    state: "Telangana",
+    verificationStatus: "Approved",
+    verified: true,
+    createdAt: "2025-02-15"
+  },
+  {
+    id: "USER_PAT_1",
+    username: "arunkumar",
+    email: "arun.kumar@healthmail.com",
+    passwordHash: "demo123",
+    role: "patient",
+    name: "Arun Kumar",
+    patientId: "VIT001",
+    avatar: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=150&auto=format&fit=crop&q=80",
+    dob: "1973-05-14",
+    gender: "Male",
+    bloodGroup: "B+",
+    phone: "+91 98765 43210",
+    emergencyContact: "Priya Kumar (Wife) - +91 98765 43211",
+    address: "Flat 4B, Emerald Heights, T. Nagar, Chennai",
+    insuranceProvider: "Star Health Insurance (Policy #SH-882910)",
+    verified: true,
+    createdAt: "2025-01-15"
+  },
+  {
+    id: "USER_PAT_2",
+    username: "meenadevi",
+    email: "meena.devi@medicare.in",
+    passwordHash: "demo123",
+    role: "patient",
+    name: "Meena Devi",
+    patientId: "VIT002",
+    avatar: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&auto=format&fit=crop&q=80",
+    dob: "1987-11-20",
+    gender: "Female",
+    bloodGroup: "O+",
+    phone: "+91 91234 56789",
+    emergencyContact: "Rajesh Devi (Spouse) - +91 91234 56780",
+    address: "12/4 Anna Salai, Guindy, Chennai",
+    insuranceProvider: "HDFC ERGO Health (Policy #HE-441029)",
+    verified: true,
+    createdAt: "2025-03-01"
+  }
+];
+
+export const SEED_HOSPITALS = [
+  { id: "HOSP001", name: "Apollo Hospitals", city: "Chennai", state: "Tamil Nadu", status: "Active", departments: ["Cardiology", "Endocrinology", "Nephrology", "General Medicine"] },
+  { id: "HOSP002", name: "Fortis Healthcare", city: "Bengaluru", state: "Karnataka", status: "Active", departments: ["Pulmonology", "Orthopedics", "Cardiology", "Neurology"] },
+  { id: "HOSP003", name: "Manipal Hospital", city: "Hyderabad", state: "Telangana", status: "Active", departments: ["Obstetrics & Gynecology", "Endocrinology", "Gastroenterology", "Pediatrics"] },
+  { id: "HOSP004", name: "Government General Hospital", city: "New Delhi", state: "Delhi", status: "Active", departments: ["General Medicine", "Emergency", "Pulmonology"] }
+];
+
+export const SEED_DEPARTMENTS = [
+  "Obstetrics & Gynecology",
+  "Endocrinology",
+  "Cardiology",
+  "Nephrology",
+  "Pulmonology",
+  "Neurology",
+  "Orthopedics",
+  "General Medicine",
+  "Gastroenterology",
+  "Pediatrics"
+];
+
+export const SEED_APPOINTMENTS = [
+  {
+    id: "APT-88210",
+    patientId: "VIT001",
+    patientName: "Arun Kumar",
+    patientEmail: "arun.kumar@healthmail.com",
+    doctorId: "USER_DOC_1",
+    doctorName: "Dr. Aditi Sharma",
+    doctorSpecialty: "Endocrinology",
+    hospitalName: "Apollo Hospitals",
+    department: "Endocrinology",
+    date: "2026-08-05",
+    time: "10:30 AM",
+    consultationType: "Physical Consultation",
+    status: "Confirmed",
+    reason: "Routine Glycemic & Renal Follow-up",
+    qrCode: "VITAIQ-APT-88210-VIT001-DOC1",
+    createdAt: "2026-07-28"
+  },
+  {
+    id: "APT-88211",
+    patientId: "VIT001",
+    patientName: "Arun Kumar",
+    patientEmail: "arun.kumar@healthmail.com",
+    doctorId: "USER_DOC_2",
+    doctorName: "Dr. Rajesh Varma",
+    doctorSpecialty: "Cardiology",
+    hospitalName: "Fortis Healthcare",
+    department: "Cardiology",
+    date: "2026-08-12",
+    time: "02:00 PM",
+    consultationType: "Video Consultation",
+    status: "Pending",
+    reason: "Hypertension and Lipid Management Review",
+    qrCode: "VITAIQ-APT-88211-VIT001-DOC2",
+    createdAt: "2026-07-28"
+  },
+  {
+    id: "APT-88212",
+    patientId: "VIT002",
+    patientName: "Meena Devi",
+    patientEmail: "meena.devi@medicare.in",
+    doctorId: "USER_DOC_3",
+    doctorName: "Dr. Kavita Reddy",
+    doctorSpecialty: "Obstetrics & Gynecology",
+    hospitalName: "Manipal Hospital",
+    department: "Obstetrics & Gynecology",
+    date: "2026-08-15",
+    time: "11:00 AM",
+    consultationType: "Physical Consultation",
+    status: "Confirmed",
+    reason: "Annual Pulmonology Review",
+    qrCode: "VITAIQ-APT-88212-VIT002-DOC3",
+    createdAt: "2026-07-28"
+  }
+];
+
+export const SEED_NOTIFICATIONS = [
+  {
+    id: "NOTIF_1",
+    userId: "USER_PAT_1",
+    title: "Appointment Confirmed",
+    message: "Your Physical Consultation with Dr. Aditi Sharma at Apollo Hospitals is confirmed for Aug 05, 2026 at 10:30 AM.",
+    timestamp: "2026-07-28T10:00:00.000Z",
+    read: false,
+    type: "appointment"
+  },
+  {
+    id: "NOTIF_2",
+    userId: "USER_DOC_1",
+    title: "New Patient Appointment Request",
+    message: "Arun Kumar booked a physical consultation for Aug 05, 2026.",
+    timestamp: "2026-07-28T09:00:00.000Z",
+    read: false,
+    type: "appointment"
+  },
+  {
+    id: "NOTIF_3",
+    userId: "USER_PAT_2",
+    title: "Appointment Confirmed",
+    message: "Your Pulmonology review with Dr. Kavita Reddy is scheduled for Aug 15, 2026.",
+    timestamp: "2026-07-28T08:00:00.000Z",
+    read: false,
+    type: "appointment"
+  }
+];
+
+export const SEED_CONNECTIONS = {
+  "VIT001": ["USER_DOC_1", "USER_DOC_2"],
+  "VIT002": ["USER_DOC_3"],
+  "VIT003": ["USER_DOC_2"]
+};
+
+export const SEED_AUDIT_LOGS = [
+  {
+    id: "LOG_1001",
+    timestamp: new Date(Date.now() - 7200000).toISOString(),
+    userId: "USER_ADMIN",
+    userName: "System Administrator",
+    userRole: "admin",
+    action: "Doctor Account Approved",
+    category: "User Management",
+    details: "Approved NMC Registration NMC/2015/04/82910 for Dr. Aditi Sharma",
+    ipAddress: "192.168.1.45"
+  },
+  {
+    id: "LOG_1002",
+    timestamp: new Date(Date.now() - 18000000).toISOString(),
+    userId: "USER_DOC_1",
+    userName: "Dr. Aditi Sharma",
+    userRole: "doctor",
+    action: "Patient Record Accessed",
+    category: "Clinical Data Access",
+    details: "Viewed longitudinal health twin record for Patient ID: VIT001 (Arun Kumar)",
+    ipAddress: "192.168.1.88"
+  },
+  {
+    id: "LOG_1003",
+    timestamp: new Date(Date.now() - 28800000).toISOString(),
+    userId: "USER_PAT_1",
+    userName: "Arun Kumar",
+    userRole: "patient",
+    action: "PHR Document Uploaded",
+    category: "Personal Health Record",
+    details: "Uploaded Comprehensive Metabolic & Lipid Panel (Apollo Hospitals)",
+    ipAddress: "182.74.12.9"
+  }
+];

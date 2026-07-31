@@ -296,7 +296,7 @@ export default function AppointmentsPage() {
                             {userRole === 'patient' ? apt.doctorName : apt.patientName}
                           </h4>
                           <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                            {apt.patientAge || '45'} yrs ({apt.patientGender || 'Male'}) • {apt.reason || apt.doctorSpecialty}
+                            {apt.patientAge ? `${apt.patientAge} yrs` : ''}{apt.patientAge && apt.patientGender ? ' ' : ''}{apt.patientGender ? `(${apt.patientGender})` : ''}{(apt.patientAge || apt.patientGender) ? ' • ' : ''}{apt.reason || apt.doctorSpecialty}
                           </span>
                         </div>
                       </div>

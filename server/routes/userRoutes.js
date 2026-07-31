@@ -4,7 +4,7 @@ import { authenticateToken, requireRole } from '../middleware/authMiddleware.js'
 
 const router = express.Router();
 
-router.get('/', getUsers);
+router.get('/', authenticateToken, requireRole(['admin', 'doctor']), getUsers);
 router.put('/:doctorId/approve', authenticateToken, requireRole(['admin']), approveDoctor);
 router.put('/:userId/suspend', authenticateToken, requireRole(['admin']), suspendUser);
 

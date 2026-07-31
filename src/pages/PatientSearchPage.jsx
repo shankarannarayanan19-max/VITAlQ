@@ -27,7 +27,7 @@ import '../styles/dashboard.css';
 
 export default function PatientSearchPage() {
   const navigate = useNavigate();
-  const { patients } = useHealthRecord();
+  const { patients, hospitals } = useHealthRecord();
   const { currentUser } = useAuth();
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -103,7 +103,7 @@ export default function PatientSearchPage() {
 
             <div className="widget-card" style={{ padding: '1.25rem', borderLeft: '4px solid #8b5cf6' }}>
               <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>Connected Hospitals</span>
-              <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.2rem' }}>4</div>
+              <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.2rem' }}>{(hospitals || []).length}</div>
             </div>
           </div>
 
