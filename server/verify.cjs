@@ -18,7 +18,7 @@ function request(method, path, body, token) {
 
 async function main() {
   // Login as admin
-  const login = await request('POST', '/api/auth/login', { username: 'admin', password: 'admin123' });
+  const login = await request('POST', '/api/auth/login', { usernameOrEmail: 'admin.vitaiq', password: 'demo123' });
   console.log('=== LOGIN ===');
   console.log('Status:', login.status);
   console.log(login.body);
